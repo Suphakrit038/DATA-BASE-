@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ฐานข้อมูลสมาชิก - PhoneZone Database</title>
+    <title>ฐานข้อมูลสมาชิก -  Database</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/enhanced.css">
     <link rel="stylesheet" href="assets/css/auth.css">
@@ -76,8 +76,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const { createClient } = supabase;
-        const supabaseUrl = 'https://ooioxfihdgwtcnvvsqpm.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9vaW94ZmloZGd3dGNudnZzcXBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM3OTQwNjMsImV4cCI6MjA2OTM3MDA2M30.xvKhayfCkiO8Wt5IRUDZF4MrzCUZeFB4YvPqKQmMdXQ';
+        const supabaseUrl = 'https://bbvrewynyoindfsgpnsw.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJidnJld3lueW9pbmRmc2dwbnN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM4MDcxMjcsImV4cCI6MjA2OTM4MzEyN30.FjrTGPY3ZFuNqd1QwSAPEUwW04g4zgF9J0-BCbTaO1E';
         const supabaseClient = createClient(supabaseUrl, supabaseKey);
 
         let isAdmin = false;
@@ -119,7 +119,7 @@
         async function loadUsers() {
             try {
                 const { data, error } = await supabaseClient
-                    .from('Information_User')
+                    .from('Info_User')
                     .select('*')
                     .order('UserID', { ascending: true });
                     
@@ -188,7 +188,7 @@
                 btn.textContent = 'กำลังบันทึก...';
 
                 const { error } = await supabaseClient
-                    .from('Information_User')
+                    .from('Info_User')
                     .update({
                         Username,
                         Password,
@@ -228,7 +228,7 @@
             
             try {
                 const { error } = await supabaseClient
-                    .from('Information_User')
+                    .from('Info_User')
                     .delete()
                     .eq('UserID', userId);
 

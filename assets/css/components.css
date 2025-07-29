@@ -411,8 +411,28 @@
 /* Admin Panel Styles */
 .admin-container {
     max-width: 1400px;
-    margin: 8rem auto 2rem;
+    margin: 2rem auto;
     padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Override body styles for admin pages */
+body:has(.admin-container) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Desktop styles for admin */
+@media (min-width: 1024px) {
+    .admin-container {
+        max-width: 1600px;
+        padding: 3rem;
+    }
 }
 
 .admin-header {
@@ -540,6 +560,15 @@
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--shadow);
+}
+
+/* Table Container */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: var(--border-radius);
+    background: rgba(255, 255, 255, 0.02);
+    padding: 1rem;
 }
 
 .data-table th,

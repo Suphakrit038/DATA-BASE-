@@ -28,6 +28,9 @@ body {
     overflow-x: hidden;
     position: relative;
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Background Effects */
@@ -242,13 +245,24 @@ body {
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     padding: 3rem 2.5rem;
-    margin: 2rem 0;
+    margin: 2rem auto;
     transition: var(--transition);
     animation: slideInUp 0.8s ease-out;
     position: relative;
     overflow: hidden;
-    max-width: 500px;
-    width: 100%;
+    max-width: 600px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Desktop specific styles */
+@media (min-width: 768px) {
+    .form-container, .container {
+        max-width: 600px;
+        padding: 4rem 3rem;
+    }
 }
 
 .form-container::before {
@@ -488,6 +502,10 @@ table td[contenteditable="true"]:focus {
 .login-link, .nav {
     text-align: center;
     margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .login-link .submit-button,
@@ -498,8 +516,9 @@ table td[contenteditable="true"]:focus {
     margin-top: 0;
     width: auto;
     display: inline-block;
-    margin: 0 8px;
+    margin: 0;
     padding: 1rem 2rem;
+    min-width: 180px;
 }
 
 .login-link .submit-button:hover,

@@ -72,7 +72,7 @@
             const Tel = document.getElementById('Tel').value;
 
             const { error } = await supabaseClient
-                .from('Info_User')
+                .from('Information_User')
                 .insert([
                     {
                         Username: Username,

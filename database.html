@@ -119,7 +119,7 @@
         async function loadUsers() {
             try {
                 const { data, error } = await supabaseClient
-                    .from('Info_User')
+                    .from('Information_User')
                     .select('*')
                     .order('UserID', { ascending: true });
                     
@@ -188,7 +188,7 @@
                 btn.textContent = 'กำลังบันทึก...';
 
                 const { error } = await supabaseClient
-                    .from('Info_User')
+                    .from('Information_User')
                     .update({
                         Username,
                         Password,
@@ -228,7 +228,7 @@
             
             try {
                 const { error } = await supabaseClient
-                    .from('Info_User')
+                    .from('Information_User')
                     .delete()
                     .eq('UserID', userId);
 

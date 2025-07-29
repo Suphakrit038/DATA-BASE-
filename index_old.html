@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าสมัครสมาชิก</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/enhanced.css">
+    <link rel="stylesheet" href="assets/css/auth.css">
+        /* Enhanced Styles for PhoneZone */
+        :root {
+            --gold: #d4af37;
+            --black: #000000;
+            --white: #ffffff;
+            --dark-gray: #1a1a1a;
+            --light-gray: #f5f5f5;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --gradient-gold: linear-gradient(135deg, #d4af37, #f6c84f);
+            --gradient-dark: linear-gradient(135deg, #000000, #1a1a1a);
+            --border-radius: 15px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Sarabun', sans-serif;
+            line-height: 1.6;
+            color: var(--white);
+            background: var(--gradient-dark);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Background Effects */
+        .gold-glow {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            z-index: -2;
+            animation: floating 20s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: rotate(0deg) translate(0, 0); }
+            33% { transform: rotate(120deg) translate(20px, -20px); }
+            66% { transform: rotate(240deg) translate(-20px, 20px); }
+        }
+
+        /* Floating Shapes */
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-shapes::before,
+        .floating-shapes::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), rgba(246, 200, 79, 0.05));
+            animation: float 15s linear infinite;
+        }
+
+        .floating-shapes::before {
+            width: 300px;
+            height: 300px;
+            top: 20%;
+            left: -150px;
+            animation-delay: 0s;
+        }
+
+        .floating-shapes::after {
+            width: 200px;
+            height: 200px;
+            bottom: 20%;
+            right: -100px;
+            animation-delay: 7s;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(0) rotate(0deg); }
+            100% { transform: translateX(100vw) rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .form-container, .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 3rem 2.5rem;
+            margin: 2rem 0;
+            transition: var(--transition);
+            animation: slideInUp 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+            z-index: -1;
+        }
+
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1, h1 {
+            color: var(--gold);
+            margin: 0 0 2rem 0;
+            font-size: clamp(2rem, 5vw, 3rem);
+            letter-spacing: 2px;
+            text-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+            font-weight: 800;
+            background: var(--gradient-gold);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
+        }
+        .form-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group input[type="tel"] {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: var(--gradient-gold);
+            color: var(--black);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            margin-top: 2rem;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            transition: var(--transition);
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f6c84f, #d4af37);
+            z-index: -1;
+            transition: left 0.5s ease;
+        }
+
+        .submit-button:hover::before {
+            left: 0;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+        }
+
+        .submit-button:active {
+            transform: translateY(-1px) scale(1.0);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        #result {
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            min-height: 30px;
+            transition: var(--transition);
+            text-align: center;
+            padding: 0.8rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        #result.success {
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        #result.error {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .login-link .submit-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            margin-top: 0;
+        }
+
+        .login-link .submit-button:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--gold);
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-top: 2px solid var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-gold);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #f6c84f, #d4af37);
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-group input {
+                padding: 0.8rem 1.2rem;
+            }
+            
+            .submit-button {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                padding: 1.5rem 1rem;
+                margin: 0.5rem;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+            
+            .form-group input {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .submit-button {
+                padding: 1rem;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gold-glow"></div>
+    <div class="floating-shapes"></div>
+    <div class="form-container">
+        <div class="header">
+            <h1 style="text-align:center;">สมัครสมาชิก</h1>
+        </div>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="Username">ชื่อผู้ใช้งาน :</label>
+                <input type="text" id="Username" name="Username" required>
+            </div>
+            <div class="form-group">
+                <label for="Password">รหัสผ่าน :</label>
+                <input type="password" id="Password" name="Password" required>
+            </div>
+            <div class="form-group">
+                <label for="Name">ชื่อ :</label>
+                <input type="text" id="Name" name="Name" required>
+            </div>
+            <div class="form-group">
+                <label for="Surname">นามสกุล :</label>
+                <input type="text" id="Surname" name="Surname" required>
+            </div>
+            <div class="form-group">
+                <label for="Tel">เบอร์โทรศัพท์ :</label>
+                <input type="tel" id="Tel" name="Tel" required>
+            </div>
+            <button type="submit" class="submit-button">สมัครสมาชิก</button>
+        </form>
+        <div id="result"></div>
+        <div class="login-link">
+            <a href="login.html">
+                <button type="button" class="submit-button">เข้าสู่ระบบ</button>
+            </a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const { createClient } = supabase;
+        // กรอก URL และ API KEY ของคุณเอง
+        const supabaseUrl = 'https://ooioxfihdgwtcnvvsqpm.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9vaW94ZmloZGd3dGNudnZzcXBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM3OTQwNjMsImV4cCI6MjA2OTM3MDA2M30.xvKhayfCkiO8Wt5IRUDZF4MrzCUZeFB4YvPqKQmMdXQ';
+        const supabaseClient = createClient(supabaseUrl, supabaseKey);
+
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Add loading state
+            const submitBtn = this.querySelector('.submit-button');
+            const originalText = submitBtn.textContent;
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'กำลังสมัครสมาชิก...';
+            
+            const Username = document.getElementById('Username').value;
+            const Password = document.getElementById('Password').value;
+            const Name = document.getElementById('Name').value;
+            const Surname = document.getElementById('Surname').value;
+            const Tel = document.getElementById('Tel').value;
+
+            const { error } = await supabaseClient
+                .from('Information_User')
+                .insert([
+                    {
+                        Username: Username,
+                        Password: Password,
+                        Name: Name,
+                        Surname: Surname,
+                        Tel: Tel
+                    }
+                ]);
+                
+            // Remove loading state
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            
+            const resultDiv = document.getElementById('result');
+            
+            if (error) {
+                resultDiv.className = 'error';
+                resultDiv.innerText = 'เกิดข้อผิดพลาด: ' + error.message;
+            } else {
+                resultDiv.className = 'success';
+                resultDiv.innerText = 'สมัครสมาชิกสำเร็จ! กำลังเปลี่ยนหน้า...';
+                document.getElementById('registerForm').reset();
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1200);
+            }
+        });
+    </script>
+</body>
+</html>

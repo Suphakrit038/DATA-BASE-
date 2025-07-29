@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หน้าสมัครสมาชิก - PhoneZone Database</title>
+    <title>เข้าสู่ระบบ - PhoneZone Database</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/enhanced.css">
     <link rel="stylesheet" href="assets/css/auth.css">
@@ -14,9 +14,9 @@
     
     <div class="form-container">
         <div class="header">
-            <h1>สมัครสมาชิก</h1>
+            <h1>เข้าสู่ระบบ</h1>
         </div>
-        <form id="registerForm">
+        <form id="loginForm">
             <div class="form-group">
                 <label for="Username">ชื่อผู้ใช้งาน</label>
                 <input type="text" id="Username" name="Username" placeholder="กรอกชื่อผู้ใช้งาน" required>
@@ -24,25 +24,13 @@
             <div class="form-group">
                 <label for="Password">รหัสผ่าน</label>
                 <input type="password" id="Password" name="Password" placeholder="กรอกรหัสผ่าน" required>
-            </div>
-            <div class="form-group">
-                <label for="Name">ชื่อ</label>
-                <input type="text" id="Name" name="Name" placeholder="กรอกชื่อจริง" required>
-            </div>
-            <div class="form-group">
-                <label for="Surname">นามสกุล</label>
-                <input type="text" id="Surname" name="Surname" placeholder="กรอกนามสกุล" required>
-            </div>
-            <div class="form-group">
-                <label for="Tel">เบอร์โทรศัพท์</label>
-                <input type="tel" id="Tel" name="Tel" placeholder="กรอกเบอร์โทรศัพท์" required>
-            </div>
-            <button type="submit" class="submit-button">สมัครสมาชิก</button>
+            </div>   
+            <button type="submit" class="submit-button">เข้าสู่ระบบ</button>
         </form>
         <div id="result"></div>
         <div class="login-link">
-            <a href="login.html">
-                <button type="button" class="submit-button">เข้าสู่ระบบ</button>
+            <a href="index.html">
+                <button type="button" class="submit-button">สมัครสมาชิก</button>
             </a>
         </div>
     </div>
@@ -50,12 +38,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const { createClient } = supabase;
-        // กรอก URL และ API KEY ของคุณเอง
         const supabaseUrl = 'https://ooioxfihdgwtcnvvsqpm.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9vaW94ZmloZGd3dGNudnZzcXBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM3OTQwNjMsImV4cCI6MjA2OTM3MDA2M30.xvKhayfCkiO8Wt5IRUDZF4MrzCUZeFB4YvPqKQmMdXQ';
         const supabaseClient = createClient(supabaseUrl, supabaseKey);
 
-        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Add loading state
@@ -63,42 +50,33 @@
             const originalText = submitBtn.textContent;
             submitBtn.classList.add('loading');
             submitBtn.disabled = true;
-            submitBtn.textContent = 'กำลังสมัครสมาชิก...';
+            submitBtn.textContent = 'กำลังเข้าสู่ระบบ...';
             
             const Username = document.getElementById('Username').value;
             const Password = document.getElementById('Password').value;
-            const Name = document.getElementById('Name').value;
-            const Surname = document.getElementById('Surname').value;
-            const Tel = document.getElementById('Tel').value;
 
-            const { error } = await supabaseClient
+            const { data, error } = await supabaseClient
                 .from('Information_User')
-                .insert([
-                    {
-                        Username: Username,
-                        Password: Password,
-                        Name: Name,
-                        Surname: Surname,
-                        Tel: Tel
-                    }
-                ]);
-                
+                .select('*')
+                .eq('Username', Username)
+                .eq('Password', Password)
+                .single();
+
             // Remove loading state
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
             submitBtn.textContent = originalText;
             
             const resultDiv = document.getElementById('result');
-            
-            if (error) {
+
+            if (error || !data) {
                 resultDiv.className = 'error';
-                resultDiv.innerText = 'เกิดข้อผิดพลาด: ' + error.message;
+                resultDiv.innerText = 'ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง';
             } else {
                 resultDiv.className = 'success';
-                resultDiv.innerText = 'สมัครสมาชิกสำเร็จ! กำลังเปลี่ยนหน้า...';
-                document.getElementById('registerForm').reset();
+                resultDiv.innerText = 'เข้าสู่ระบบสำเร็จ! กำลังเปลี่ยนหน้า...';
                 setTimeout(() => {
-                    window.location.href = 'login.html';
+                    window.location.href = 'database.html';
                 }, 1200);
             }
         });
